@@ -1,0 +1,68 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Yaban",
+      "author": "Yakup Kadri KARAOSMANOĞLU",
+      "isbn": "123456789",
+      "categoryId": "1"
+    },
+    {
+      "id": 2,
+      "name": "Öc",
+      "author": "Ömer SEYFETTİN",
+      "isbn": "123365798",
+      "categoryId": "2"
+    },
+    {
+      "id": 3,
+      "name": "Alamut",
+      "author": "Peter WELLEY",
+      "isbn": "126493029",
+      "categoryId": "3"
+    },
+    {
+      "id": 4,
+      "name": "Vurun Kahpeye",
+      "author": "Halide Edip ADIVAR",
+      "isbn": "758493789",
+      "categoryId": "4"
+    },
+    {
+      "id": 5,
+      "name": "Mahşerin Dört Atlısı",
+      "author": "Ömer DİRİCANLI",
+      "isbn": "101600411",
+      "categoryId": "5"
+    },
+    {
+      "id": 1663425218603,
+      "name": " Derin Darbe",
+      "author": "Süfyan",
+      "isbn": "1313131313",
+      "categoryId": "2"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Roman"
+    },
+    {
+      "id": "2",
+      "name": "Hikaye"
+    },
+    {
+      "id": "4",
+      "name": "Deneme"
+    },
+    {
+      "id": "4",
+      "name": "Öykü"
+    },
+    {
+      "id": "5",
+      "name": "Makale"
+    }
+  ]
+}

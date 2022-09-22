@@ -8,9 +8,9 @@
       "categoryId": "1"
     },
     {
-      "id": 2,
       "name": "Öc",
       "author": "Ömer SEYFETTİN",
+      "id": 2,
       "isbn": "123365798",
       "categoryId": "2"
     },
@@ -29,18 +29,18 @@
       "categoryId": "4"
     },
     {
-      "id": 5,
       "name": "Mahşerin Dört Atlısı",
       "author": "Ömer DİRİCANLI",
+      "id": 5,
       "isbn": "101600411",
-      "categoryId": "5"
+      "categoryId": "1"
     },
     {
-      "id": 1663425218603,
-      "name": " Derin Darbe",
-      "author": "Süfyan",
-      "isbn": "1313131313",
-      "categoryId": "2"
+      "id": 1663849680834,
+      "name": " fazıl",
+      "author": "kara mehmed",
+      "isbn": "849348324",
+      "categoryId": "1"
     }
   ],
   "categories": [
@@ -53,7 +53,7 @@
       "name": "Hikaye"
     },
     {
-      "id": "4",
+      "id": "3",
       "name": "Deneme"
     },
     {

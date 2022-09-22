@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 const AddBook = (props) => {
   const [categories, setCategories] = useState(null);
@@ -8,6 +9,7 @@ const AddBook = (props) => {
   const [authorName, setAuthorName] = useState(" ");
   const [isbn, setisbn] = useState("");
   const [category, setCategory] = useState();
+  let navigate = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:3004/categories")
@@ -28,6 +30,7 @@ const AddBook = (props) => {
     event.preventDefault();
     if (bookName === "" || authorName === "" || category === "") {
       alert("Kitap adı, Yazarı veya Kategorisi Boş Bırakılamaz.");
+      return
     }
     const newBook = {
       id: new Date().getTime(),
@@ -39,6 +42,14 @@ const AddBook = (props) => {
     axios
       .post("http://localhost:3004/books", newBook )
       .then((res) => {
+        setBookName("");
+        setAuthorName("");
+        setisbn("");
+        setCategory("");
+        setTimeout(() => {
+          navigate(`/`);
+        }, 1000);
+        
         console.log(res);
       })
       .catch((err) => console.log(err));
@@ -86,7 +97,7 @@ const AddBook = (props) => {
               Kategori seçiniz
             </option>
             {categories.map((cat) => {
-              return <option value={cat.id}>{cat.name}</option>;
+              return <option key={cat.id} value={cat.id}>{cat.name}</option>;
             })}
             ;
           </select>

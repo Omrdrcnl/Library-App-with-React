@@ -3,15 +3,22 @@ import axios from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
+import { useSelector } from "react-redux";
 
 const ListBooks = (props) => {
-  const [books, setBooks] = useState(null);
-  const [categories, setCategories] = useState(null);
-  const [didUpdate, setDidUpdate] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [silinecekKitap, setSilinecekKitap] = useState(null);
+  // const uygulamaStatei = useSelector((state)=>state);
+  const { categoriesState, booksState } = useSelector((state) => state);
+  console.log(categoriesState);
+  console.log(booksState);
+  //Js-destruction ile state içinceki yalnız categories statei çekmek için kullandık.
+  // aksi halde tüm state bir dizi içinde gelecektir. diğer ifade ona örnektir.
+  //console.log(uygulamaStatei);
 
-  
+  // const [books, setBooks] = useState(null); bookState'i ekleyince kaldırdık.
+  // const [categories, setCategories] = useState(null);
+  const [didUpdate, setDidUpdate] = useState(false);
+  const [onCancel, setOnCancel] = useState(false);
+  const [silinecekKitap, setSilinecekKitap] = useState(null);
 
   const deleteBook = (id) => {
     console.log(id);
@@ -20,28 +27,29 @@ const ListBooks = (props) => {
       .then((res) => {
         console.log(res);
         setDidUpdate(!didUpdate);
-        setShowModal(false);
+        setOnCancel(false);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    axios
-      .get(" http://localhost:3004/books")
-      .then((resBook) => {
-        setBooks(resBook.data);
-        axios
-          .get(" http://localhost:3004/categories")
-          .then((resCat) => {
-            setTimeout(() => {
-              setCategories(resCat.data);
-            }, 1000);
-          })
-          .catch((err) => console.log("categories error", err));
-      })
-      .catch((err) => console.log("books error", err));
+    // axios
+    //   .get(" http://localhost:3004/books")
+    //   .then((resBook) => {
+    //     setBooks(resBook.data);
+    //     // axios
+    //     //   .get(" http://localhost:3004/categories")
+    //     //   .then((resCat) => {
+    //     //     setTimeout(() => {
+    //     //       setCategories(resCat.data);
+    //     //     }, 1000);
+    //     //   })
+    //     //   .catch((err) => console.log("categories error", err));
+    //   })
+    //   .catch((err) => console.log("books error", err));
   }, [didUpdate]);
-  if (books === null || categories === null) {
+  if (booksState.success !== true || categoriesState.success == !true) {
+    // categories === null // books == null
     return (
       <div className="text-center my-5">
         <Loading />
@@ -51,11 +59,7 @@ const ListBooks = (props) => {
   return (
     <div>
       <div className="d-flex justify-content-end">
-        <Link
-          to="/Add-book"
-          className="btn btn-primary mt-5 mb-1 
-      "
-        >
+        <Link to="/Add-book" className="btn btn-primary mt-5 mb-1">
           Kitap Ekle
         </Link>
       </div>
@@ -72,8 +76,9 @@ const ListBooks = (props) => {
           </tr>
         </thead>
         <tbody>
-          {books.map((books) => {
-            const category = categories.find(
+          {booksState.books.map((books) => {
+            //books.map
+            const category = categoriesState.categories.find(
               (cat) => cat.id === books.categoryId
             );
             return (
@@ -85,9 +90,11 @@ const ListBooks = (props) => {
                 <td className="d-flex">
                   <button
                     onClick={() => {
-                      setShowModal(true);
-                      setSilinecekKitap(books.id)}} 
-                    className="btn btn-danger mx-1 btn-sm"  >
+                      setOnCancel(true);
+                      setSilinecekKitap(books.id);
+                    }}
+                    className="btn btn-danger mx-1 btn-sm"
+                  >
                     Sil
                   </button>
                   <Link
@@ -102,13 +109,14 @@ const ListBooks = (props) => {
           })}
         </tbody>
       </table>
-      {
-        showModal===true && <Modal 
-        title = "Silme İşlemi"
-        acıklama = "Devam etmek istiyor musunuz ?"
-        yapılacakIs = {()=>deleteBook(silinecekKitap)}
-        setShowModal={setShowModal}/>
-      }
+      {onCancel === true && (
+        <Modal
+          title="Silme İşlemi"
+          acıklama="Devam etmek istiyor musunuz ?"
+          onConfirm={() => deleteBook(silinecekKitap)}
+          onCancel={() => setOnCancel(false)}
+        />
+      )}
     </div>
   );
 };

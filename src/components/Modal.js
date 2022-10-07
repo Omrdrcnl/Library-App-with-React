@@ -1,4 +1,4 @@
-import { useState } from "react";
+import react from "react";
 
 
 const Modal = (props) => {
@@ -6,10 +6,10 @@ const Modal = (props) => {
   
 
 
-  const {setShowModal, yapılacakIs, title, acıklama} = props;
+  const {onCancel, onConfirm, title, acıklama} = props;
 
   return (
-    <div
+    <button onClick={onCancel} 
       style={{
         position: "absolute",
         width: "100vw",
@@ -20,6 +20,7 @@ const Modal = (props) => {
         justifyContent: "center",
         alignItems: "center",
         display: "flex",
+        cursor: "default"
       }}
     >
       <div
@@ -40,21 +41,21 @@ const Modal = (props) => {
           </div>
           <div className="modal-footer justify-content-center">
             <button
-              onClick={() => setShowModal(false)}
+              onClick={onCancel}
               className="btn btn-outline-danger mx-1"
               data-bs-dismiss="modal"
             >
               Kapat
             </button>
             <button
-            onClick={yapılacakIs}
+            onClick={onConfirm}
             className="btn btn-outline-success">
               Onayla
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

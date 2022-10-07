@@ -4,10 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import Loading from "../components/Loading";
+import Modal from "../components/Modal";
+import { useSelector } from "react-redux";
 
 const EditBook = () => {
-
-    const navigate = useNavigate();
+  const {categoriesState} = useSelector((state)=>state);
+  console.log(categoriesState);
+  const navigate = useNavigate();
   const params = useParams();
   console.log("param değeri", params);
 
@@ -15,7 +18,8 @@ const EditBook = () => {
   const [authorName, setAuthorName] = useState("");
   const [isbn, setisbn] = useState("");
   const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState(null);
+  // const [categories, setCategories] = useState(null);
+  const [onCancel, setOnCancel] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,21 +30,23 @@ const EditBook = () => {
         setAuthorName(res.data.author);
         setisbn(res.data.isbn);
         setCategory(res.data.categoryId);
-        axios
-          .get("http://localhost:3004/categories")
-          .then((resCat) => {
-            console.log(resCat);
+        // axios
+        //   .get("http://localhost:3004/categories")
+        //   .then((resCat) => {
+        //     console.log(resCat);
 
-            setCategories(resCat.data);
-          })
-          .catch((error) => console.log(error));
+        //     setCategories(resCat.data);
+        //   })
+        //   .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setOnCancel(true);
+  };
+  const EditThisBook = () => {
     if (bookName === "" || authorName === "" || category === "") {
       alert("Kitap adı, Yazarı veya Kategorisi Boş Bırakılamaz.");
       return;
@@ -60,7 +66,8 @@ const EditBook = () => {
       })
       .catch((err) => console.log(err));
   };
-  if (categories === null) {
+
+  if (categoriesState.success !== true) {
     return <Loading />;
   }
 
@@ -102,11 +109,12 @@ const EditBook = () => {
             <select
               class="form-select"
               value={category}
-              onChange={(event) => setCategory(event.target.value)}>
+              onChange={(event) => setCategory(event.target.value)}
+            >
               <option value={""} selected>
                 Kategori seçiniz
               </option>
-              {categories.map((cat) => {
+              {categoriesState.categories.map((cat) => {
                 return <option value={cat.id}>{cat.name}</option>;
               })}
               ;
@@ -114,7 +122,11 @@ const EditBook = () => {
           </div>
         </div>
         <div className="d-flex justify-content-center">
-          <button onClick={()=> navigate("/")} type="button" className="btn btn-danger me-2 btn-md w-25 my-5">
+          <button
+            onClick={() => navigate("/")}
+            type="button"
+            className="btn btn-danger me-2 btn-md w-25 my-5"
+          >
             Vazgeç
           </button>
           <button type="submit" className="btn btn-info btn-md w-25 my-5">
@@ -122,6 +134,14 @@ const EditBook = () => {
           </button>
         </div>
       </form>
+      {onCancel === true && (
+        <Modal
+          onConfirm={() => EditThisBook()}
+          onCancel={() => setOnCancel(false)}
+          title="Kaydetme İşlemi"
+          acıklama="Devam Etmek İstiyor Musunuz ?"
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,9 @@
 {
   "books": [
     {
-      "id": 1,
       "name": "Yaban",
       "author": "Yakup Kadri KARAOSMANOĞLU",
+      "id": 1,
       "isbn": "123456789",
       "categoryId": "1"
     },
@@ -29,18 +29,60 @@
       "categoryId": "4"
     },
     {
-      "name": "Mahşerin Dört Atlısı",
+      "name": "Mahşerin Dört Atlısı II",
       "author": "Ömer DİRİCANLI",
       "id": 5,
-      "isbn": "101600411",
+      "isbn": "101600344",
       "categoryId": "1"
     },
     {
-      "id": 1663849680834,
-      "name": " fazıl",
-      "author": "kara mehmed",
-      "isbn": "849348324",
+      "name": " uyduruk",
+      "author": "Sinan HAKSEVER",
+      "id": 1664782950508,
+      "isbn": "4325436573",
+      "categoryId": "4"
+    },
+    {
+      "name": " Kaktüsler de Çiçek",
+      "author": "Eda DİRİCANLI",
+      "id": 1664806522926,
+      "isbn": "7532843928",
       "categoryId": "1"
+    },
+    {
+      "id": 1664967368656,
+      "name": " ali baba",
+      "author": "kara bela",
+      "isbn": "43243245",
+      "categoryId": "1"
+    },
+    {
+      "id": 1664967403511,
+      "name": " kırk haramiler",
+      "author": "ali baba",
+      "isbn": "4325346546",
+      "categoryId": "1"
+    },
+    {
+      "id": 1664967444754,
+      "name": " kara pürçek",
+      "author": "kazım hayratlı",
+      "isbn": "t34654654",
+      "categoryId": "1"
+    },
+    {
+      "id": 1664967488978,
+      "name": " kırık elmas",
+      "author": "Ali MERTOĞLU",
+      "isbn": "543654753",
+      "categoryId": "1"
+    },
+    {
+      "id": 1664967792336,
+      "name": "Elmas Yığınların Altında",
+      "author": "Fehmi ALTINKÖZ",
+      "isbn": "7584939435",
+      "categoryId": "2"
     }
   ],
   "categories": [

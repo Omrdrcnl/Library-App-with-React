@@ -2,35 +2,42 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddBook = (props) => {
-  const [categories, setCategories] = useState(null);
+  const dispatch = useDispatch();
+  // const [categories, setCategories] = useState(null);
   const [bookName, setBookName] = useState(" ");
   const [authorName, setAuthorName] = useState(" ");
   const [isbn, setisbn] = useState("");
   const [category, setCategory] = useState();
+  const { categoriesState } = useSelector((state) => state);
+  console.log("categorystate:", categoriesState);
+
   let navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("http://localhost:3004/categories")
-      .then((res) => {
-        console.log(res);
-        setCategories(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get("http://localhost:3004/categories")
+    //   .then((res) => {
+    //     console.log(res);
+    //     setCategories(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
-  if (categories === null) {
-    return(<div><Loading/></div>)
-    
-    
+  if (categoriesState.success !== true) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   const handleSubmit = (event) => {
     event.preventDefault();
     if (bookName === "" || authorName === "" || category === "") {
       alert("Kitap adı, Yazarı veya Kategorisi Boş Bırakılamaz.");
-      return
+      return;
     }
     const newBook = {
       id: new Date().getTime(),
@@ -40,16 +47,20 @@ const AddBook = (props) => {
       categoryId: category,
     };
     axios
-      .post("http://localhost:3004/books", newBook )
+      .post("http://localhost:3004/books", newBook)
       .then((res) => {
+        dispatch({
+          type: "ADD_BOOK",
+          payload: newBook,
+        });
         setBookName("");
         setAuthorName("");
         setisbn("");
         setCategory("");
         setTimeout(() => {
           navigate(`/`);
-        }, 1000);
-        
+        }, 500);
+
         console.log(res);
       })
       .catch((err) => console.log(err));
@@ -96,8 +107,12 @@ const AddBook = (props) => {
             <option value={""} selected>
               Kategori seçiniz
             </option>
-            {categories.map((cat) => {
-              return <option key={cat.id} value={cat.id}>{cat.name}</option>;
+            {categoriesState.categories.map((cat) => {
+              return (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              );
             })}
             ;
           </select>

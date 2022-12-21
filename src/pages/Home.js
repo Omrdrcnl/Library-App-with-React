@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import ListBooks from "../components/ListBooks";
 
-const home = (props) => {
+const Home = (props) => {
+  useEffect(() => {
+    document.title = "Kitaplık";
+  }, []);
   return (
     <div className="container">
       <Header />
@@ -11,4 +14,4 @@ const home = (props) => {
   );
 };
 
-export default home;
+export default Home;

@@ -5,10 +5,11 @@ import axios from "axios";
 import { useState } from "react";
 import Loading from "../components/Loading";
 import Modal from "../components/Modal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const EditBook = () => {
-  const {categoriesState} = useSelector((state)=>state);
+  const dispatch = useDispatch();
+  const { categoriesState, booksState } = useSelector((state) => state);
   console.log(categoriesState);
   const navigate = useNavigate();
   const params = useParams();
@@ -22,24 +23,33 @@ const EditBook = () => {
   const [onCancel, setOnCancel] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3004/books/${params.booksId}`)
-      .then((res) => {
-        console.log(res.data);
-        setBookName(res.data.name);
-        setAuthorName(res.data.author);
-        setisbn(res.data.isbn);
-        setCategory(res.data.categoryId);
-        // axios
-        //   .get("http://localhost:3004/categories")
-        //   .then((resCat) => {
-        //     console.log(resCat);
+    const searchedBook = booksState.books.find(
+      (item) => item.id == params.booksId
+    );
+    console.log("kara", searchedBook);
+    setBookName(searchedBook.name);
+    setAuthorName(searchedBook.author);
+    setisbn(searchedBook.isbn);
+    setCategory(searchedBook.categoryId);
+    //   axios
+    //     .get(`http://localhost:3004/books/${params.booksId}`)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       setBookName(res.data.name);
+    //       setAuthorName(res.data.author);
+    //       setisbn(res.data.isbn);
+    //       setCategory(res.data.categoryId);
+    //       // axios
+    //       //   .get("http://localhost:3004/categories")
+    //       //   .then((resCat) => {
+    //       //     console.log(resCat);
 
-        //     setCategories(resCat.data);
-        //   })
-        //   .catch((error) => console.log(error));
-      })
-      .catch((error) => console.log(error));
+    //       //     setCategories(resCat.data);
+    //       //   })
+    //       //   .catch((error) => console.log(error));
+    //     })
+    //     .catch((error) => console.log(error));
+    document.title = `Kitaplık - Kitap Ekle ${searchedBook.name} `;
   }, []);
 
   const handleSubmit = (event) => {
@@ -62,6 +72,7 @@ const EditBook = () => {
       .put(`http://localhost:3004/books/${params.booksId}`, updatedBook)
       .then((resUp) => {
         console.log(resUp);
+        dispatch({ type: "EDIT_BOOK", payload: updatedBook });
         navigate("/");
       })
       .catch((err) => console.log(err));

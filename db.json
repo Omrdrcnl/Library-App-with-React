@@ -4,7 +4,7 @@
       "name": "Yaban",
       "author": "Yakup Kadri KARAOSMANOĞLU",
       "id": 1,
-      "isbn": "123456789",
+      "isbn": "123456456",
       "categoryId": "1"
     },
     {
@@ -36,52 +36,10 @@
       "categoryId": "1"
     },
     {
-      "name": " uyduruk",
-      "author": "Sinan HAKSEVER",
-      "id": 1664782950508,
-      "isbn": "4325436573",
-      "categoryId": "4"
-    },
-    {
-      "name": " Kaktüsler de Çiçek",
-      "author": "Eda DİRİCANLI",
-      "id": 1664806522926,
-      "isbn": "7532843928",
-      "categoryId": "1"
-    },
-    {
-      "id": 1664967368656,
-      "name": " ali baba",
-      "author": "kara bela",
-      "isbn": "43243245",
-      "categoryId": "1"
-    },
-    {
-      "id": 1664967403511,
-      "name": " kırk haramiler",
-      "author": "ali baba",
-      "isbn": "4325346546",
-      "categoryId": "1"
-    },
-    {
-      "id": 1664967444754,
-      "name": " kara pürçek",
-      "author": "kazım hayratlı",
-      "isbn": "t34654654",
-      "categoryId": "1"
-    },
-    {
-      "id": 1664967488978,
-      "name": " kırık elmas",
-      "author": "Ali MERTOĞLU",
-      "isbn": "543654753",
-      "categoryId": "1"
-    },
-    {
-      "id": 1664967792336,
-      "name": "Elmas Yığınların Altında",
-      "author": "Fehmi ALTINKÖZ",
-      "isbn": "7584939435",
+      "name": " Siyah Kurdele edit",
+      "author": " Nazım AÇIKGÖZ",
+      "id": 1665817929967,
+      "isbn": "632753255",
       "categoryId": "2"
     }
   ],

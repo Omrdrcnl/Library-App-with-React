@@ -3,9 +3,10 @@ import axios from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const ListBooks = (props) => {
+  const dispatch = useDispatch();
   // const uygulamaStatei = useSelector((state)=>state);
   const { categoriesState, booksState } = useSelector((state) => state);
   console.log(categoriesState);
@@ -25,6 +26,7 @@ const ListBooks = (props) => {
     axios
       .delete(` http://localhost:3004/books/${id}`)
       .then((res) => {
+        dispatch({type:"DELETE_BOOK", payload : id}) 
         console.log(res);
         setDidUpdate(!didUpdate);
         setOnCancel(false);

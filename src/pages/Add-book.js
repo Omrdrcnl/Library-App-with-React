@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import AddBook from "../components/AddBook";
 
-const Addbook = (props)=>{
+const Addbook = (props) => {
+  useEffect(() => {
+    document.title = "Kitaplık  -  Kitap Ekle";
+  }, []);
 
-    return(
-        <div className="container">
-        <Header/>
-        <AddBook/>
-        </div>
-    )
-}
+  return (
+    <div className="container">
+      <Header />
+      <AddBook />
+    </div>
+  );
+};
 
-export default Addbook; 
+export default Addbook;

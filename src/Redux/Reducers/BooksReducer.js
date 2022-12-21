@@ -30,8 +30,26 @@ const booksReducer = (state = initialState, action) => {
     case "ADD_BOOK":
       return {
         ...state,
-        books: [...state.books, action.payload]
+        books: [...state.books, action.payload],
       };
+    case "DELETE_BOOK":
+      const filteredBooks = state.books.filter(
+        (item) => item.id !== action.payload
+      );
+      return {
+        ...state,
+        books: filteredBooks,
+      };
+    case "EDIT_BOOK":
+      //öncelikle edit kitabı sil sonrasın da güncel olanı ekle
+      const filteredBooksEdit = state.books.filter(
+        (item) => item.id != action.payload.id
+      );
+      return {
+        ...state,
+        books: [...filteredBooksEdit, action.payload],
+      };
+
     default:
       return state;
   }

@@ -5,6 +5,7 @@ import Addbook from "./pages/Add-book";
 import EditBook from "./pages/EditBook";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import CategoriesList from "./pages/categoriesList";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Add-book" element={<Addbook />} />
         <Route path="/edit-book/:booksId" element={<EditBook />} />
+        <Route path="/categoriesList" element={<CategoriesList />} />
       </Routes>
     </BrowserRouter>
   );

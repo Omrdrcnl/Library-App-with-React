@@ -26,6 +26,13 @@ const Header = (props) => {
                 <Link to="/" className="nav-link" aria-current="page">
                   Kitaplar
                 </Link>
+                <Link
+                  to="/categoriesList"
+                  className="nav-link"
+                  aria-current="page"
+                >
+                  Kategoriler
+                </Link>
               </li>
             </ul>
           </div>
